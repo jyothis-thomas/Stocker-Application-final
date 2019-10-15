@@ -1,8 +1,9 @@
 {% extends 'base2.html' %}
 {% block content %}
-  {% if api %}
+  <div style="padding-bottom: 6%;">
+    {% if api %}
       {% if api == "Error.. Make sure you have entered a correct ticker" %}
-          An error has occured try again. Make sure you have entered a valid ticker symbol
+        An error has occured try again. Make sure you have entered a valid ticker symbol
       {% else %}
         <h1>{{api.companyName}}</h1>
         <h5>The pricing details are:</h5>
@@ -10,71 +11,74 @@
           <tbody>
             <tr>
               <th scope="row">Price:</th>
-              <td>{{ api.latestPrice }}</td>
+              <td>${{ api.latestPrice }}</td>
             </tr>
             <tr>
               <th scope="row">Previous Close</th>
-              <td>{{ api.previousClose }}</td>
+              <td>${{ api.previousClose }}</td>
             </tr>
             <tr>
               <th scope="row">Market Cap</th>
-              <td>{{ api.marketCap }}</td>
+              <td>${{ api.marketCap }}</td>
             </tr>
             <tr>
               <th scope="row">YTD Change</th>
-              <td>{{ api.ytdChange }}</td>
+              <td>{{ api.ytdChange }}%</td>
             </tr>
             <tr>
               <th scope="row">52 week High</th>
-              <td>{{ api.week52High }}</td>
+              <td>${{ api.week52High }}</td>
             </tr>
             <tr>
               <th scope="row">52 week Low</th>
-              <td>{{ api.week52Low }}</td>
+              <td>${{ api.week52Low }}</td>
             </tr>
           </tbody>
         </table> 
         <hr/>
       {% endif %}
-  {% else %}
+    {% else %}
       {% if ticker %}
-          Hi {{ user.username }}! Here are your favorite stock details:
-          <br/><br/>
-          <table class="table table-striped table-bordered table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Company Name</th>
-                <th scope="col">Stock Price</th>
-                <th scope="col">Previous Close</th>
-                <th scope="col">Market Cap</th>
-                <th scope="col">YTD Change</th>
-                <th scope="col">52Wk High</th>
-                <th scope="col">52Wk Low</th>                
-              </tr>
-            </thead>
-            <tbody>
-              {% if ticker %}
-                {% for list_item in output %}
-                  <tr>
-                    <th scope="row">{{ list_item.companyName }}</th> 
-                    <td>${{ list_item.latestPrice }}</td>
-                    <td>${{ list_item.previousClose }}</td>
-                    <td>${{ list_item.marketCap }}</td>
-                    <td>{{ list_item.ytdChange }}%</td>
-                    <td>${{ list_item.week52High }}</td>
-                    <td>${{ list_item.week52Low }}</td>                              
-                  </tr>
-                {% endfor%}            
-              {% endif %}
-            </tbody>
-          </table>
-          <p style="float: right"> Click to <a href="/add_stock/">Add</a> or <a href="/delete_stock/">remove</a> to add stocks to Favorites</p>
-          {% else %}
-            <p>Hi {{ user.username }}! Add some Favorite stocks from above panel.</p>
-            <div style="border:1px solid black; padding: 2%; border-radius: 4px;">
-              <p><span style="color: red;">IMPORTANT:</span> If you don't know what a ticker symbol is please read the article in the <a href="https://www.investopedia.com/terms/t/tickersymbol.asp" target="_blank">link</a> to gain some insight on what a ticker symbol is. If you want to know the Ticker symbol of a company, please visit <a href="http://eoddata.com/symbols.aspx" target="_blank">here</a> and note the ticker symbol.</p>
-              <p>&emsp;You'll only have to add the symbol once to favorites. Next time you login, the stock prices will be shown here. Click <a href="/add_stock/">here</a> to add some stock to favorites</p>
-            </div>
+        Hi {{ user.username }}! Here are your favorite stock details:
+        <br/><br/>
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Company Name</th>
+              <th scope="col">Stock Price</th>
+              <th scope="col">Previous Close</th>
+              <th scope="col">Market Cap</th>
+              <th scope="col">YTD Change</th>
+              <th scope="col">52Wk High</th>
+              <th scope="col">52Wk Low</th>                
+            </tr>
+          </thead>
+          <tbody>
+            {% if ticker %}
+              {% for list_item in output %}
+                <tr>
+                  <th scope="row">{{ list_item.companyName }}</th> 
+                  <td>${{ list_item.latestPrice }}</td>
+                  <td>${{ list_item.previousClose }}</td>
+                  <td>${{ list_item.marketCap }}</td>
+                  <td>{{ list_item.ytdChange }}%</td>
+                  <td>${{ list_item.week52High }}</td>
+                  <td>${{ list_item.week52Low }}</td>                              
+                </tr>
+              {% endfor%}            
+            {% endif %}
+          </tbody>
+        </table>
+        <p style="float: right"> Click to <a href="/add_stock/">Add</a> or <a href="/delete_stock/">remove</a> to add stocks to Favorites</p>
+        {% else %}
+        <br/>
+          <p>Hi {{ user.username }}! Add some stocks to Favorites by going <a href="/add_stock/">here</a>. Or search for company prices through the input window on the top-right</p>
+          <br/>
+          <div style="border:1px solid black; padding: 2%; border-radius: 4px;">
+            <p><span style="color: red;">IMPORTANT:</span> If you don't know what a ticker symbol is please read the article in the <a href="https://www.investopedia.com/terms/t/tickersymbol.asp" target="_blank">link</a> to gain some insight on what a ticker symbol is. If you want to know the Ticker symbol of a company, please visit <a href="http://eoddata.com/symbols.aspx" target="_blank">here</a> and note the ticker symbol.</p>
+            <p>&emsp;You'll only have to add the symbol once to favorites. Next time you login, the stock prices will be shown here. Click <a href="/add_stock/">here</a> to add some stock to favorites</p>
+          </div>
       {% endif %}
-  {% endif %}
+    {% endif %}
+  </div>
 {% endblock content %}

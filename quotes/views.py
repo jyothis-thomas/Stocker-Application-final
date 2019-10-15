@@ -6,12 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.core.paginator import Paginator
-
 @login_required
 def home(request):
     import requests
     import json
-
     if request.method == 'POST':
         ticker = request.POST['ticker_symbol']
         api_requests = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
@@ -43,7 +41,6 @@ def profile(request):
 def add_stock(request):
     import requests
     import json
-
     if request.method == 'POST':
         stock_form = StockForm(request.POST or None)
 
@@ -121,7 +118,6 @@ def news(request):
         newsdata=paginator.page(paginator.num_pages)
     context={'newsdata': newsdata} 
     return render(request, 'news.html', context)
-
 @login_required
 def edit(request):
     if request.method == 'POST':
@@ -137,7 +133,6 @@ def edit(request):
 
 # def delete_user(request, username):
 #     context = {}
-
 #     try:
 #         u = User.objects.get(username=username)
 #         u.delete()

@@ -1,10 +1,10 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-
-<h1><u><b>Top Business-NEWS of the hour</b></u></h1>
+<div style="font-family: 'Archivo', sans-serif;">
+<h1 style="font-family: 'Vollkorn', serif;"><u><b>Top Business-NEWS of the hour</b></u></h1>
      {% for article in newsdata %}
-          <div class="row" style="padding: 1%; min-height: 137px">
+          <div class="row" style="padding: 1%; min-height: 137px; background-color: gainsboro; border-radius: 19px;">
                <div class="col-sm-3">
                     <img src="{{article.image}}" style="width: 100%" alt="Image not found">
                </div>

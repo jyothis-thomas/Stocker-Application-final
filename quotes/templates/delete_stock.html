@@ -1,27 +1,31 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-  <h1>Delete From Favorites</h1>
-  {% if ticker %}
-    <p>Press the corresponding button to delete stock from Favorites</p>
-    <table class="table table-borderless">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Ticker Symbol</th>
-          <th scope="col">Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in ticker %}
+  <div style="padding-bottom: 6%;">
+    <h1>Delete From Favorites</h1>
+    {% if ticker %}
+      <p>Press the corresponding button to delete stock from Favorites</p>
+      <table class="table table-borderless">
+        <thead class="thead-dark">
           <tr>
-            <th scope="row">{{ item }}</th>
-            <td><a href="{% url 'delete' item.id %}" onclick="clickAndDisable(this);" class="btn btn-secondary">Delete {{ item }}</a></td>
+            <th scope="col">Ticker Symbol</th>
+            <th scope="col">Delete</th>
           </tr>
-        {% endfor%}
-      </tbody>
-    </table>
-    <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
+        </thead>
+        <tbody>
+          {% for item in ticker %}
+            <tr>
+              <th scope="row">{{ item }}</th>
+              <td><a href="{% url 'delete' item.id %}" onclick="clickAndDisable(this);" class="btn btn-secondary">Delete {{ item }}</a></td>
+            </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+      <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
     {% else %}
-        <p style="float: right">Click <a href="/add_stock/">Here</a> to add some stocks to delete</p>
-  {% endif %}
+      <br/>
+      <p>&emsp;Hi, it seems you havn't added any stocks Favorites.</p>
+      <p style="float: right">Click <a href="/add_stock/">Here</a> to add some stocks to delete</p>
+    {% endif %}
+  </div>
 {% endblock content %}
