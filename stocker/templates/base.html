@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
   <head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,8 +8,11 @@
     <link href='https://fonts.googleapis.com/css?family=Alike' rel='stylesheet'>
     <title>{% block title %}Stocker-App{% endblock %}</title>
   </head>
-  <body style="height: 100%">
+  <body style="height: 100%" background="{% static 'stocker/images/signup.jpg' %}">
     <main>
+      <div style="padding: 1%; background-color: #303030; color: aliceblue;">
+        <h1 id="colorlib-logo" class="mb-4" style=" font-family:Times New Roman; padding-left: 1%;"><b>Stocker-App</b></h1> 
+      </div>
       {% block content %}
       {% endblock %}
     </main>

@@ -2,31 +2,34 @@
 
 {% block title %}Login{% endblock %}
 {% block content %}
-  <br/>
-  <body>    
+  <br/>  
     <div style="padding :2%">
-      <h1 id="colorlib-logo" class="mb-4" style=" font-family:Times New Roman"><b>Stocker-App</b></h1> 
-      <h2 id="colorlib-logo" class="mb-4" style="text-align: center; font-family: 'Alike'; "><b>Login</b></h2>
-      {% load widget_tweaks %}
-      <form class="form-signin" method="POST">
-        {% csrf_token %}
-        <div action="#" style="width: 28%; margin-left : 35%; margin-right: 35%; margin-top: 5%">
-        <div class="form-group">
-          {% render_field form.username  type="text" class="form-control" placeholder="Username"%}
+      <div class="row">
+      <div class="col-sm-4 padding-0"></div>
+        <div class="col-sm-4 padding-0" style="background-color: aliceblue; border-radius: 4%; padding: 3%; padding-bottom: 5%;">
+          <h2 style="text-align: center; font-family: 'Alike'; "><b>Login</b></h2>
+            {% load widget_tweaks %}              
+              <form class="form-signin" method="POST">
+                {% csrf_token %}
+                <div action="#" >
+                  <div class="form-group">
+                    {% render_field form.username  type="text" class="form-control" placeholder="Username"%}
+                  </div>
+                  <div class="form-group">
+                    {% render_field form.password type="password"  class="form-control" placeholder="Password"%}
+                  </div>    
+                  <div class="form-group">
+                    <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4">
+                    <a style="text-decoration: none;color:white" class="btn btn-primary py-2 px-4" href="/accounts/signup">Sign-Up</a>
+                    <a style="color:black" href="/password-reset" class="ml-3"> Forgot password?</a>
+                  </div>
+                </div>   
+              </form>            
+            {% if form.errors %}
+              <p style="color: red;">username or password not correct</p>
+            {% endif %}
+            <div class="col-sm-4 padding-0"></div>
         </div>
-        <div class="form-group">
-          {% render_field form.password type="password"  class="form-control" placeholder="Password"%}
-        </div>    
-        <div class="form-group">
-          <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4">
-          <button class="btn btn-primary py-2 px-4"><a style="text-decoration: none;color:white" href="/accounts/signup">Sign-Up</a></button>
-          <a style="color:black" href="/password-reset" class="ml-3"> Forgot password?</a>
-        </div>
-        </div>   
-      </form>
-      {% if form.errors %}
-        <p>username or password not correct</p>
-      {% endif %}
-    </div>
-  </body>    
+      </div>
+    </div>  
 {% endblock content %}
