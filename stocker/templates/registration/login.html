@@ -21,8 +21,9 @@
                   <div class="form-group">
                     <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4">
                     <a style="text-decoration: none;color:white" class="btn btn-primary py-2 px-4" href="/accounts/signup">Sign-Up</a>
-                    <a style="color:black" href="/password-reset" class="ml-3"> Forgot password?</a>
+                    <a style="color:black" href="/password-reset" class="ml-3"> Forgot password?</a> 
                   </div>
+                  <a style="text-decoration: none;color:white" class="btn btn-primary py-2 px-4" href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
                 </div>   
               </form>            
             {% if form.errors %}
