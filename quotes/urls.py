@@ -9,4 +9,5 @@ urlpatterns = [
     path('news/', views.news, name = "news"),
     path('profile/', views.profile, name="profile"),
     path('profile/edit',views.edit,name='edit'),
+    path('autocomplete/ticker/', views.TickerAutocomplete.as_view(), name = 'ticker-autocomplete')
 ]
