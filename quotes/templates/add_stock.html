@@ -2,8 +2,8 @@
 {% load static %}
 {% block scripts %}
   <script>
-        $(document).ready(function(){
-        //$('#artists_hid').val("|");
+    $(document).ready(function(){
+    //$('#artists_hid').val("|");
     // $.ajaxSetup({ cache: false });
     $('#ticker_id').keyup(function(){
       $('#ticker_results').html('');
@@ -35,7 +35,7 @@
   <p>&emsp;Enter ticker symbol below to add to Favorites</p>
   <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST">                       
     {% csrf_token %}
-    <div class="row">
+    <div class="row" style="width: 65%;">
       <div class="col p-0">
           <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Symbol Ticker here" aria-label="Search"  autocomplete="off" style="width: 98%;">
           <div style="height: fit-content; overflow: scroll; max-height: 100px;">
