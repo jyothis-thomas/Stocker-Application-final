@@ -8,6 +8,7 @@
       <div class="col-sm-4 padding-0"></div>
         <div class="col-sm-4 padding-0" style="background-color: aliceblue; border-radius: 4%; padding: 3%; padding-bottom: 5%;">
           <h2 style="text-align: center; font-family: 'Alike'; "><b>Login</b></h2>
+          <br/>
             {% load widget_tweaks %}              
               <form class="form-signin" method="POST">
                 {% csrf_token %}
@@ -19,15 +20,17 @@
                     {% render_field form.password type="password"  class="form-control" placeholder="Password"%}
                   </div>    
                   <div class="form-group">
-                    <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4">
-                    <a style="text-decoration: none;color:white" class="btn btn-primary py-2 px-4" href="/accounts/signup">Sign-Up</a>
-                    <a style="color:black" href="/password-reset" class="ml-3"> Forgot password?</a> 
+                    <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4" style="width: 49%;">
+                    <a style="text-decoration: none;color:white; float:right; width: 48%;" class="btn btn-primary py-2 px-4" href="/accounts/signup">Sign-Up</a>   
                   </div>
-                  <a style="text-decoration: none;color:white; float: right;" class="btn btn-danger py-2 px-4" href="{% url 'social:begin' 'google-oauth2' %}">Sign-In with Google</a><br>
+                  <div>
+                    <a style="color:black; float: left; padding-top: 2%;" href="/password-reset" class="ml-1"> Forgot password?</a>
+                    <a style="text-decoration: none;color:white; float: right; width: 48%;" class="btn btn-danger py-2 px-3" href="{% url 'social:begin' 'google-oauth2' %}">Sign-In with Google</a><br>
+                </div>
                 </div>   
               </form>            
             {% if form.errors %}
-              <p style="color: red;">username or password not correct</p>
+              <p style="color: red;">Username or password not correct</p>
             {% endif %}
             <div class="col-sm-4 padding-0"></div>
         </div>
