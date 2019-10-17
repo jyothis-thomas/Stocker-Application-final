@@ -146,8 +146,8 @@ LOGOUT_REDIRECT_URL = 'home1'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'tactist.player@gmail.com'
-EMAIL_HOST_PASSWORD = 'tactist_player1@'
+EMAIL_HOST_USER = 'xxx'
+EMAIL_HOST_PASSWORD = 'xxx'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Stocker Team <noreply@stocker.com>'
