@@ -9,11 +9,13 @@
       }
     }   
   </script>
-    <div class="row" style="padding: 5%;">
+  <div style="padding: 2%;">
+    <div class="row" style="margin-bottom: 25px;">
       <div class="col-sm-4 padding-0"></div>
-      <div class="col-sm-4 padding-0" style="background-color: aliceblue; border-radius: 3%; padding: 4%;">
+      <div class="col-sm-4 padding-0" style="background-color: aliceblue; border-radius: 3%; padding: 3%;">
         <div> 
-          <h1 style="text-align: center;">Signup</h1>
+          <h1 style="text-align: center; font-family: 'Alike';"><b>Signup</b></h1>
+          <br/>
           {% load widget_tweaks %}
           <form class="form-signin" method="POST">
             {% csrf_token %}
@@ -60,5 +62,6 @@
         {% endif %}
       </div>
       <div class="col-sm-4 padding-0"></div>
-    </div>          
+    </div>
+  </div>          
 {% endblock %}
