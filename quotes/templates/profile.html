@@ -1,8 +1,9 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-  <h3>Your profile</h3>
-  <table class="table table-borderless">
+  <div>
+    <h3>Your profile</h3>
+    <table class="table table-borderless">
       <tbody>
         <tr>
           <th scope="row">Username</th>
@@ -17,10 +18,11 @@
           <td colspan="2">{{ user.last_name }}</td>
         </tr>
         <tr>
-            <th scope="row">Email</th>
-            <td colspan="2">{{ user.email }}</td>
-          </tr>
+          <th scope="row">Email</th>
+          <td colspan="2">{{ user.email }}</td>
+        </tr>
       </tbody>
     </table>
     <a href="{% url 'edit' %}" onclick="clickAndDisable(this);" class="btn btn-secondary">Edit profile</a>
+  </div>
 {% endblock content %}
