@@ -2,38 +2,49 @@
 
 {% block title %}Login{% endblock %}
 {% block content %}
-  <br/>  
-    <div style="padding :2%">
-      <div class="row">
-      <div class="col-sm-4 padding-0"></div>
-        <div class="col-sm-4 padding-0" style="background: rgba(171, 205, 239, 0.98); border-radius: 4%; padding: 3%; padding-bottom: 5%;">
-          <h2 style="text-align: center; font-family: 'Alike'; "><b>Login</b></h2>
-          <br/>
-            {% load widget_tweaks %}              
-              <form class="form-signin" method="POST">
-                {% csrf_token %}
-                <div action="#" >
-                  <div class="form-group">
-                    {% render_field form.username  type="text" class="form-control" placeholder="Username"%}
+  {% load static %}
+
+  <div style="padding :2%">
+    <div class="row">
+    <div class="col-sm-4 padding-0"></div>
+      <div class="col-sm-4 padding-0" style="background: rgba(171, 205, 239, 0.98); border-radius: 4%; padding: 3%; padding-bottom: 5%;">
+        <h2 style="text-align: center; font-family: 'Alike'; "><b>Login</b></h2>
+        {% load widget_tweaks %}              
+        <form class="form-signin" method="POST">
+          {% csrf_token %}
+          <div action="#" >
+            <div class="form-group">
+              {% render_field form.username  type="text" class="form-control" placeholder="Username"%}
+            </div>
+            <div class="form-group">
+              {% render_field form.password type="password"  class="form-control" placeholder="Password"%}
+            </div>    
+            <div class="form-group">
+              <input type="submit" value="Sign-In" class="btn" style="width: 49%;">
+              <a style="text-decoration: none;color:white; float:right; width: 48%;" class="btn" href="/accounts/signup">Sign-Up</a>   
+            </div>
+            <div>
+              <a href="{% url 'social:begin' 'google-oauth2' %}" style="text-transform:none">
+                <div class="btn white darken-4 col s10" style="border-radius: 10px !important; width: -webkit-fill-available;">
+                  <div class="left" style="margin-top: 2%;">
+                    <img width="20px" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>  
                   </div>
-                  <div class="form-group">
-                    {% render_field form.password type="password"  class="form-control" placeholder="Password"%}
-                  </div>    
-                  <div class="form-group">
-                    <input type="submit" value="Sign-In" class="btn btn-primary py-2 px-4" style="width: 49%;">
-                    <a style="text-decoration: none;color:white; float:right; width: 48%;" class="btn btn-primary py-2 px-4" href="/accounts/signup">Sign-Up</a>   
-                  </div>
-                  <div>
-                    <a style="color:black; float: left; padding-top: 2%;" href="/password-reset" class="ml-1"> Forgot password?</a>
-                    <a style="text-decoration: none;color:white; float: right; width: 48%;" class="btn btn-danger py-2 px-3" href="{% url 'social:begin' 'google-oauth2' %}">Sign-In with Google</a><br>
+                  <p style="color: rgba(80,80,80);; font-family: 'Roboto', sans-serif; font-size: medium;padding-top: 2%; font-weight: 500;">Login with Google</p>
                 </div>
-                </div>   
-              </form>            
-            {% if form.errors %}
-              <p style="color: red;">Username or password not correct</p>
-            {% endif %}
-            <div class="col-sm-4 padding-0"></div>
-        </div>
+              </a>                   
+            </div>
+            <div sty>
+              <a style="color:black; float: right; padding-top: 2%; text-align: center;" href="/password-reset" class="ml-1"> Forgot password?</a>
+            </div>
+          </div>   
+        </form>            
+        {% if form.errors %}
+          <div style="padding-top: 15%;">
+            <p style="color: red; padding-top: 2%;">Username or password not correct</p>
+          </div>
+        {% endif %}
       </div>
-    </div>  
+      <div class="col-sm-4 padding-0"></div>
+    </div>
+  </div>  
 {% endblock content %}
