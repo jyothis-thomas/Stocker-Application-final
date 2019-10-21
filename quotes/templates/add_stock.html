@@ -1,6 +1,12 @@
 {% extends 'base2.html' %}
 {% load static %}
 {% block scripts %}
+<style>
+  .pointer {cursor: pointer;}
+  li:hover{
+    background-color: darkgray;
+  }
+</style>
   <script>
     $(document).ready(function(){
     //$('#artists_hid').val("|");
@@ -13,7 +19,7 @@
         //alert(data)
       $.each(JSON.parse(data), function(key, value){
         //alert(value+" -- "+expression);
-        $('#ticker_results').append(`<li class="list-group-item link-class" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
+        $('#ticker_results').append(`<li class="list-group-item link-class pointer" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
       });   
       });
     });   
@@ -37,8 +43,8 @@
       {% csrf_token %}
       <div class="row" style="width: 65%;">
         <div class="col p-0">
-            <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Symbol Ticker here" aria-label="Search"  autocomplete="off" style="width: 98%;">
-            <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute;">
+            <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Company name" aria-label="Search"  autocomplete="off" style="width: 98%;">
+            <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px; min-width: 100%;">
               <ul id = "ticker_results" class="list-group">
               </ul>
             </div>
