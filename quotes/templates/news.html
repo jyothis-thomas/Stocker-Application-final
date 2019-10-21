@@ -1,13 +1,18 @@
 {% extends 'base2.html' %}
 
 {% block content %}
+{% load static %}
 <div style="font-family: 'Archivo', sans-serif;">
      <h1 style="font-family: 'Vollkorn', serif;"><u><b>Top Business-NEWS of the hour</b></u></h1>
      <br/>
      {% for article in newsdata %}
-          <div class="row" style="padding: 2%; min-height: 137px; background: rgba(220, 220, 220, 0.98); border-radius: 19px;">
+          <div class="row" style="padding: 2%; min-height: 137px; background: rgba(211, 211, 211, 0.7); border-radius: 19px;">
                <div class="col-sm-3">
-                    <img src="{{article.image}}" style="width: 100%" alt="Image not found">
+                    {% if article.image %}
+                         <img src="{{article.image}}" style="width: 100%" alt="news image">
+                    {% else %}
+                         <img src="{% static 'quotes/images/invalid.jpg' %}" style="width: 100%" alt="Image not found">
+                    {% endif %}
                </div>
                <div class="col-sm-7">
                     <h5><b>{{article.a}}</b></h5>
