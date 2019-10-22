@@ -2,7 +2,7 @@
 
 {% block content %}
   <div style="padding-bottom: 6%;">
-    <h1>Delete From Favorites</h1>
+    <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;">Delete From Favorites</h1>
     {% if ticker %}
       <p>Press the corresponding button to delete stock from Favorites</p>
       <table class="table table-borderless">
@@ -16,12 +16,14 @@
           {% for item in ticker %}
             <tr>
               <th scope="row">{{ item }}</th>
-              <td><a href="{% url 'delete' item.id %}" onclick="clickAndDisable(this);" class="btn btn-secondary">Delete {{ item }}</a></td>
+              <td><a href="{% url 'delete' item.id %}" onclick="clickAndDisable(this);" class="btn btn-secondary" style="width: 25%;">Delete {{ item }}</a></td>
             </tr>
           {% endfor%}
         </tbody>
       </table>
-      <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
+      <div style="padding-top: 2%;">
+        <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
+      </div>
     {% else %}
       <br/>
       <p>&emsp;Hi, it seems you havn't added any stocks Favorites.</p>

@@ -37,9 +37,9 @@
 {% endblock %}
 {% block content %}
   <div>
-    <h1>Add to Favorites </h1>
-    <p>&emsp;Type and select company name to add to favorites</p>
-    <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST">                       
+    <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;">Add to Favorites </h1>
+    <p>Type and select company name to add to favorites</p>
+    <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST" style="margin-left: 1.5%;">                       
       {% csrf_token %}
       <div class="row" style="width: 65%;">
         <div class="col p-0">
@@ -89,10 +89,12 @@
               {% endif %}
           </tbody>
         </table>
-        <p style="float: right"> Click <a href="/delete_stock/">Here</a> to delete stocks from Favorites</p>
+        <div style="padding-top: 2%;">
+          <p style="float: right"> Click <a href="/delete_stock/">Here</a> to delete stocks from Favorites</p>
+        </div>
       </div>
         {% else %}
-          <div style="border:1px solid darkgray; padding: 2%; border-radius: 4px;">
+          <div style="border:1px solid darkgray; padding: 2%; border-radius: 4px; background-color: rgba(220, 220, 220, .7);">
             <h6><b>Don't know the Ticker symbol of the company you want?</b></h6> 
             <p>We got you covered! Just visit the <a href="http://eoddata.com/symbols.aspx" target="_blank">link</a> and find the ticker symbol of the company you want to add to favorites.</p>
           </div>
