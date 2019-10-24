@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
   <script type="text/javascript"></script>
   <script> 
     function clickAndDisable(link) {
@@ -11,8 +12,16 @@
   </script>
   <div style="padding: 2%;">
     <div class="row" style="margin-bottom: 25px;">
-      <div class="col-sm-4 padding-0"></div>
-      <div class="col-sm-4 padding-0" style="background: rgba(240, 240, 240, 0.95); border-radius: 3%; padding: 3%;">
+      <div class="col-sm-2 padding-0"></div>
+      <div class="col-sm-4 padding-0" style="background: rgba(255, 255, 255, 0.9); border-radius: 85px 0px 0px 0px; padding: 3%;">
+        <img src="{% static 'stocker/images/stocker.jpg' %}" style="display: block; width: 100%;border-radius: 20px 0px 20px 0px;">
+        <br>
+        <div style="color: rgb(50,50,50);">
+          <h2 style="font-family: 'Alike';"><b>Signup</b>, Stay on top of the game</h2>
+          <p> &nbsp;Start your journey to the world of stock-market with us! You'll never regret it!</p>
+        </div>
+      </div>
+      <div class="col-sm-4 padding-0" style="background: rgba(230, 230, 230, 0.95); border-radius:  0px 0px 85px 0px; padding: 3%;">
         <div> 
           <h1 style="text-align: center; font-family: 'Alike';"><b>Signup</b></h1>
           <br/>
@@ -62,7 +71,7 @@
           <!-- /Error messaging -->
         {% endif %}
       </div>
-      <div class="col-sm-4 padding-0"></div>
+      <div class="col-sm-2 padding-0"></div>
     </div>
   </div>          
 {% endblock %}
