@@ -135,9 +135,9 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home1'
 LOGOUT_REDIRECT_URL = 'home1'
 
-# SENDGRID_API_KEY = os.getenv('Send_grid_api_from_login')
+# SENDGRID_API_KEY = os.getenv('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')
 # EMAIL_BACKEND = 'sgbackend.SendGridBackend'
-# SENDGRID_API_KEY = "Send_grid_api_from_login"
+# SENDGRID_API_KEY = "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"
 # EMAIL_HOST = 'smtp.sendgrid.net'
 # EMAIL_HOST_USER = 'apikey'
 # EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
