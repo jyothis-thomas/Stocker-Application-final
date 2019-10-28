@@ -135,9 +135,9 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home1'
 LOGOUT_REDIRECT_URL = 'home1'
 
-SENDGRID_API_KEY = os.getenv('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')
+SENDGRID_API_KEY = os.getenv('xxx')
 EMAIL_BACKEND = 'sgbackend.SendGridBackend'
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = "xxx"
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
@@ -147,8 +147,8 @@ EMAIL_USE_TLS = True
 # Gmail signup
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'tactist.player@gmail.com'
-# EMAIL_HOST_PASSWORD = 'jyothis1@'
+# EMAIL_HOST_USER = 'xxx'
+# EMAIL_HOST_PASSWORD = 'xxx'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # DEFAULT_FROM_EMAIL = 'Stocker Team <noreply@stocker.com>'
