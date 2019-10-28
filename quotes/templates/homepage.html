@@ -65,7 +65,7 @@
           {% for list_item in output %}
             <tr>
               <th scope="row">{{ list_item.symbol }}</th>
-              <td>${{ list_item.companyName }}</td>
+              <td>{{ list_item.companyName }}</td>
               <td>${{ list_item.latestPrice }}</td>
               <td>${{ list_item.previousClose }}</td>
               <td>${{ list_item.marketCap }}</td>
