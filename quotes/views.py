@@ -202,8 +202,8 @@ def graph(request, ticker):
     #Store as a HTML file
     output_file("quotes/templates/stock_information.html", title="candlestick.py example")
     save(p)
-    return render(request, 'stock_information.html', {})
-    # return render(request, 'k.html', {})
+    # return render(request, 'stock_information.html', {})
+    return render(request, 'k.html', {})
 
 class TickerAutocomplete(View):
     def get(self,request):

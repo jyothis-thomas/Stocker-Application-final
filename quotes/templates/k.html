@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends 'base2.html' %}
 
-<iframe src="stock_information.html">
-  <p>Your browser does not support iframes.</p>
-</iframe>
-
-</body>
-</html>
+{% block content %}
+    {% include "stock_information.html" %}
+{% endblock content %}
