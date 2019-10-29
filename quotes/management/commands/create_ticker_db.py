@@ -1,13 +1,9 @@
-# from django.contrib.auth.models import User
 import json
-# from django.utils import timezone
-# from django.core.files import File
 from quotes.models import TickerModel
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     help = 'Create ticker'
-
     def handle(self, *args, **kwargs):
         with open('symbol.txt') as json_file:
             data = json.load(json_file)
