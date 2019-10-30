@@ -6,5 +6,13 @@
         {% include "stock_information.html" %}
     </div>
     <br>
-    <p style="float: right">Go back to <a href="{% url 'home1' %}">Home</a></p>
+    <button onclick="goBack()">Go Back</button>
+    <p style="float: right">Go back to <span style="color :blue;"><a onclick="goBack();">Home</a></span></p>
+    {% block scripts %}
+    <script>
+            function goBack() {
+              window.history.back();
+            }
+            </script>
+    {% endblock %}
 {% endblock content %}
