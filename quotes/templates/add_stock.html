@@ -17,10 +17,10 @@
       //alert(searchField)
       $.getJSON("{% url 'ticker-autocomplete' %}",data="q="+searchField,function(data) {
         //alert(data)
-      $.each(JSON.parse(data), function(key, value){
-        //alert(value+" -- "+expression);
-        $('#ticker_results').append(`<li class="list-group-item link-class pointer" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
-      });   
+        $.each(JSON.parse(data), function(key, value){
+          //alert(value+" -- "+expression);
+          $('#ticker_results').append(`<li class="list-group-item link-class pointer" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
+        });   
       });
     });   
     $('#ticker_results').on('click', 'li', function() {
