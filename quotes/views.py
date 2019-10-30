@@ -16,7 +16,7 @@ def home(request):
     import requests
     import json
     if request.method == 'POST':
-        ticker = request.POST['ticker_symbol']
+        ticker = request.POST['ticker_symbol_hidden']
         api_requests = requests.get("https://cloud.iexapis.com/stable/stock/" +
                                     ticker + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
         try:
