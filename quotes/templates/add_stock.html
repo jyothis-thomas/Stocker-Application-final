@@ -33,9 +33,21 @@
       // $('#ticker_id').val($.trim(click_text));      
     });
     });
-    $('#ticker_id').focusout(function(){
-        $('#ticker_results').empty();
-      });
+    // $('#ticker_division').focusout(function(){
+    //     $('#ticker_results').empty();
+    //   });
+      function roundOff(percent) {
+  
+        roundOff_twoPlaces = percent.toFixed(4); 
+  
+            return roundOff_twoPlaces; 
+        } 
+        let items = [{% if ticker %}{% for list_item in output %}{{ list_item.ytdChange }},{% endfor%}{% endif %}];
+        for(var i=0;i<items.length;i++){
+              var tdd = document.getElementById(i.toString(10));
+              tdd.innerText = roundOff(items[i])+'%';
+              console.log(tdd);
+        }
   </script>
 {% endblock %}
 {% block content %}
@@ -45,7 +57,7 @@
     <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST" style="margin-left: 1.5%;">                       
       {% csrf_token %}
       <div class="row" style="width: 65%;">
-        <div class="col p-0">
+        <div class="col p-0" id="ticker_division">
             <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Company name" aria-label="Search"  autocomplete="off" style="width: 98%;">
             <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px; min-width: 100%;">
               <ul id = "ticker_results" class="list-group">
@@ -84,7 +96,7 @@
                     <td>${{ list_item.latestPrice }}</td>
                     <td>${{ list_item.previousClose }}</td>
                     <td>${{ list_item.marketCap }}</td>
-                    <td>{{ list_item.ytdChange }}%</td>
+                    <td id="{{forloop.counter0}}"></td>
                     <td>${{ list_item.week52High }}</td>
                     <td>${{ list_item.week52Low }}</td>                           
                   </tr>
@@ -92,6 +104,9 @@
               {% endif %}
           </tbody>
         </table>
+        <script>
+            
+        </script>
         <div style="padding-top: 2%;">
           <p style="float: right"> Click <a href="/delete_stock/">Here</a> to delete stocks from Favorites</p>
         </div>
