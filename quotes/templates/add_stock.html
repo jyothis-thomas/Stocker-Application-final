@@ -33,6 +33,9 @@
       // $('#ticker_id').val($.trim(click_text));      
     });
     });
+    $('#ticker_id').focusout(function(){
+        $('#ticker_results').empty();
+      });
   </script>
 {% endblock %}
 {% block content %}
