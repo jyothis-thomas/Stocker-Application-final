@@ -36,18 +36,7 @@
     // $('#ticker_division').focusout(function(){
     //     $('#ticker_results').empty();
     //   });
-      function roundOff(percent) {
-  
-        roundOff_twoPlaces = percent.toFixed(4); 
-  
-            return roundOff_twoPlaces; 
-        } 
-        let items = [{% if ticker %}{% for list_item in output %}{{ list_item.ytdChange }},{% endfor%}{% endif %}];
-        for(var i=0;i<items.length;i++){
-              var tdd = document.getElementById(i.toString(10));
-              tdd.innerText = roundOff(items[i])+'%';
-              console.log(tdd);
-        }
+      
   </script>
 {% endblock %}
 {% block content %}
@@ -96,7 +85,7 @@
                     <td>${{ list_item.latestPrice }}</td>
                     <td>${{ list_item.previousClose }}</td>
                     <td>${{ list_item.marketCap }}</td>
-                    <td id="{{forloop.counter0}}"></td>
+                    <td>{{ list_item.ytdChange|floatformat:4 }}%</td>                    
                     <td>${{ list_item.week52High }}</td>
                     <td>${{ list_item.week52Low }}</td>                           
                   </tr>

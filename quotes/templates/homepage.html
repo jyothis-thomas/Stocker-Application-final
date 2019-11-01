@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <th scope="row">YTD Change</th>
-            <td>{{ api.ytdChange }}%</td>
+            <td>{{ api.ytdChange|floatformat:4 }}%</td>
           </tr>
           <tr>
             <th scope="row">52 week High</th>
@@ -71,7 +71,7 @@
               <td>${{ list_item.latestPrice }}</td>
               <td>${{ list_item.previousClose }}</td>
               <td>${{ list_item.marketCap }}</td>
-              <td>{{ list_item.ytdChange }}%</td>
+              <td>{{ list_item.ytdChange|floatformat:4 }}%</td>
               <td>${{ list_item.week52High }}</td>
               <td>${{ list_item.week52Low }}</td>
               <td><a href="{% url 'graph' list_item.symbol %}" onclick="clickAndDisable(this);" class="btn btn-secondary" >View</a></td>
