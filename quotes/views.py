@@ -10,12 +10,33 @@ from django.http import JsonResponse
 import json
 from django.core import serializers
 from django.views import View
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
 
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user.is_active:    
+        # Redirecting to the required login according to user status.
+            if user.is_superuser or user.is_staff:
+                login(request, user)
+                return redirect('/admin/')  # or your url name
+            else:
+                login(request, user)
+                return redirect('/') 
+                
 @login_required
 def home(request):
     import requests
     import json
     if request.method == 'POST':
+        # losers_response = request.get("https://cloud.iexapis.com/stable/stock/market/list/losers/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
+        # losers = json.loads(losers_response.content)
+        # gainers_response = request.get("https://cloud.iexapis.com/stable/stock/market/list/gainers/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
+        # gainers = json.loads(gainers_response.content)
         ticker = request.POST['ticker_symbol_hidden']
         api_requests = requests.get("https://cloud.iexapis.com/stable/stock/" +
                                     ticker + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
@@ -54,6 +75,66 @@ def profile(request):
 def add_stock(request):
     import requests
     import json
+    import operator
+    import collections
+    not_current_user = []
+    ticker = Stock.objects.filter(user=request.user)
+    current_ticker_list = []
+    for tic in ticker:
+        current_ticker_list.append(tic.ticker)
+    # if current_ticker_list == null:
+    #     return render(request, 'add_stock.html', {'ticker': ticker, '': dictionary})
+    ticker_all = Stock.objects.all()
+    for i in ticker_all:
+        if (i in ticker):
+            print ("")
+        else :
+            # print (i.user)
+            not_current_user.append(i.user)
+    
+    user_name = set(not_current_user)
+    print (user_name)
+    ticker_users = []
+    for p in user_name :
+        ticker_users.append(Stock.objects.filter(user=p))
+    sugesstion_ticker = []
+    
+    for r in ticker_users:
+        for u in r:
+            for l in ticker:
+                
+                if l.ticker == u.ticker:
+                    sugesstion_ticker.append(Stock.objects.filter(user=u.user))
+    all_suggestions = []
+    for j in sugesstion_ticker:
+        for i in j:
+            all_suggestions.append(i.ticker)
+    # print(all_suggestions)
+    dictionary = {}
+    for tickers in all_suggestions:
+        dictionary.update({tickers : all_suggestions.count(tickers)})
+    # print(dictionary)
+    print(current_ticker_list)
+    try:
+        for item in current_ticker_list:
+            del dictionary[item]
+    except Exception as e:
+        print("item not found")
+    # print(dictionary)
+    for key, value in dictionary.items():
+        print(key)
+        company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
+                                        key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
+        try:
+            api = json.loads(company_name.content)
+        except Exception as e:
+            print("error")
+        print(api['companyName'])
+        dictionary[api['companyName']] = dictionary.pop(key)
+    sorted_dict = sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+    dictionary = collections.OrderedDict(sorted_dict)
+    print(dictionary)
+        
 
     if request.method == 'POST':
         stock_form = StockForm(request.POST or None)
@@ -95,9 +176,9 @@ def add_stock(request):
                 except Exception as e:
                     api = "Error.. Make sure you have entered a correct ticker"
 
-            return render(request, 'add_stock.html', {'ticker': ticker, 'output': output})
+            return render(request, 'add_stock.html', {'ticker': ticker, 'output': output, 'dict': dictionary})
         else:
-            return render(request, 'add_stock.html', {'ticker': ticker})
+            return render(request, 'add_stock.html', {'ticker': ticker, 'dict': dictionary})
 
 
 @login_required
@@ -193,7 +274,7 @@ def graph(request, ticker):
     w = 12*60*60*1000 # half day in ms
     TOOLS = "pan,wheel_zoom,box_zoom,reset,save"
     title = stock_name + ' Chart'
-    p = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000, title = title)
+    p = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000, title = title, x_axis_label= "Date", y_axis_label= "Stock Price")
     p.xaxis.major_label_orientation = math.pi/4
     p.grid.grid_line_alpha=0.3
     p.segment(df.date, df.high, df.date, df.low, color="black")
@@ -219,3 +300,51 @@ class TickerAutocomplete(View):
             return JsonResponse(serializers.serialize('json',qs),safe=False)
         except IndexError:
             return JsonResponse({})
+def test(request):
+    not_current_user = []
+    ticker = Stock.objects.filter(user=request.user)
+    current_ticker_list = []
+    for tic in ticker:
+        current_ticker_list.append(tic.ticker)
+    ticker_all = Stock.objects.all()
+    for i in ticker_all:
+        if (i in ticker):
+            print ("")
+        else :
+            # print (i.user)
+            not_current_user.append(i.user)
+    user_name = set(not_current_user)
+    print (user_name)
+    ticker_users = []
+    for p in user_name :
+        ticker_users.append(Stock.objects.filter(user=p))
+    sugesstion_ticker = []
+    
+    for r in ticker_users:
+        for u in r:
+            for l in ticker:
+                
+                if l.ticker == u.ticker:
+                    sugesstion_ticker.append(Stock.objects.filter(user=u.user))
+    all_suggestions = []
+    for j in sugesstion_ticker:
+        for i in j:
+            all_suggestions.append(i.ticker)
+    print(all_suggestions)
+    dictionary = {}
+    for tickers in all_suggestions:
+        dictionary.update({tickers : all_suggestions.count(tickers)})
+    print(dictionary)
+    print(current_ticker_list)
+    try:
+        for item in current_ticker_list:
+            del dictionary[item]
+    except Exception as e:
+        print("item not found")
+    sorted(dictionary.items(), key=lambda x:x[1])
+    print(dictionary)
+    if not dictionary:
+        print("Dictionary in if")
+    else:
+        print("else")
+    return render(request , 'test.html', {'dict': dictionary})       

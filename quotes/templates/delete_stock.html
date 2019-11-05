@@ -1,33 +1,137 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-  <div style="padding-bottom: 6%;">
-    <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;">Delete From Favorites</h1>
-    {% if ticker %}
-      <p>Press the corresponding button to delete stock from Favorites</p>
-      <table class="table table-borderless">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Ticker Symbol</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in ticker %}
-            <tr>
-              <th scope="row">{{ item }}</th>
-              <td><a href="{% url 'delete' item.id %}" onclick="clickAndDisable(this);" class="btn btn-secondary" style="width: 25%;">Delete {{ item }}</a></td>
-            </tr>
-          {% endfor%}
-        </tbody>
-      </table>
-      <div style="padding-top: 2%;">
-        <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
+<style>
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 65%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
+  <br/>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissable" role="alert">
+        <button class="close" data-dismiss="alert">
+          <small><sup>x</sup></small>
+        </button>
+        {{ message }}
       </div>
-    {% else %}
-      <br/>
-      <p>&emsp;Hi, it seems you havn't added any stocks Favorites.</p>
-      <p style="float: right">Click <a href="/add_stock/">Here</a> to add some stocks to delete</p>
-    {% endif %}
+    {% endfor %}
+  {% endif %}
+    <div style="padding-bottom: 6%;">
+      <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;">Delete From Favorites</h1>
+      {% if ticker %}
+        <p>Press the corresponding button to delete stock from Favorites</p>
+        <table class="table table-borderless">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Ticker Symbol</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in ticker %}
+              <tr>
+                <th scope="row">{{ item }}</th>
+                <td onclick="deleteitem('{% url 'delete' item.id %}');"><p class="btn btn-secondary" style="width: 25%;" id="myBtn">Delete {{ item }}</p></td>
+              </tr>
+            {% endfor%} 
+          </tbody>
+        </table>
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="text-align: center;">Are you sure you want to delete?</p>
+            <a onclick="confirmDelete();" class="btn btn-secondary" style="width: 25%; align-self: center; ">Delete</a>
+          </div>
+        
+        </div>
+        
+        <div style="padding-top: 2%;">
+          <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
+        </div>
+      {% else %}
+        <br/>
+        <p>&emsp;Hi, it seems you havn't added any stocks Favorites.</p>
+        <p style="float: right">Click <a href="/add_stock/">Here</a> to add some stocks to delete</p>
+      {% endif %}
+    </div>
   </div>
+  <script>
+    var url = null;
+
+    function deleteitem(itemurl){
+      console.log("something");
+      url = itemurl;
+    }
+
+    function confirmDelete(){
+      console.log(url);
+      location.href = url;
+    }
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+    
 {% endblock content %}

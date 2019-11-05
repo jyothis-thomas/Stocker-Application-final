@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/edit',views.edit,name='edit'),
     path('autocomplete/ticker/', views.TickerAutocomplete.as_view(), name = 'ticker-autocomplete'),
     path('graph/<ticker>', views.graph, name = 'graph'),
+    path('test/',views.test)
 ]

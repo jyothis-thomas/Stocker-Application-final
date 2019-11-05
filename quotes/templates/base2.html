@@ -34,11 +34,11 @@
 
   <body style="max-width: 100%; height: auto; font-family: 'Roboto', sans-serif;" background="{% static 'quotes/images/home.jpg' %}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-2">
-      <a class="navbar-brand" href="{% url 'home1' %}" style="font-family: 'Times New Roman', Times, serif;"><b>Stocker-App</b></a>
+      <a class="nav-link" href="{% url 'home1' %}" style="font-family: 'Times New Roman', Times, serif; color: aliceblue;font-size: larger;"><b>Stocker-App</b></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>        
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-top: 4px;">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'home1' %}">Home <span class="sr-only">(current)</span></a>
@@ -59,9 +59,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'profile' %}">View Profile</a>
               <a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
-              <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
-              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'about' %}">About</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
             </div>
           </li>
         </ul>   
@@ -83,21 +83,13 @@
           </form>
       </div>
     </nav>
-    <div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
-      <br/>
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-warning alert-dismissable" role="alert">
-            <button class="close" data-dismiss="alert">
-              <small><sup>x</sup></small>
-            </button>
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
+    
+
       {% block content %}
+
       {% endblock %}
-    </div>
+    
+
     <div class="footer" style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: rgba(48, 48, 48, .96); color: white; text-align: center; padding-top: 5px; padding-bottom: 5px; "> 
       &#169; <a href="https://www.sayonetech.com" target="_blank" style="text-decoration: none;">Sayone</a> All rights reserved
     </div>

@@ -2,46 +2,59 @@
 
 {% block content %}
 {% load static %}
-<div>
-     <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;"><u><b>Top Business-NEWS of the hour</b></u></h1>
+<div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
      <br/>
-     {% for article in newsdata %}
-          <div class="row" style="padding: 2%; min-height: 137px; background: rgba(211, 211, 211, 0.5); border-radius: 19px;">
-               <div class="col-sm-3">
-                    {% if article.image %}
-                         <img src="{{article.image}}" style="width: 100%" alt="news image">
-                    {% else %}
-                         <img src="{% static 'quotes/images/invalid.jpg' %}" style="width: 100%" alt="Image not found">
+     {% if messages %}
+       {% for message in messages %}
+         <div class="alert alert-warning alert-dismissable" role="alert">
+           <button class="close" data-dismiss="alert">
+             <small><sup>x</sup></small>
+           </button>
+           {{ message }}
+         </div>
+       {% endfor %}
+     {% endif %}
+     <div>
+          <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;"><u><b>Top Business-NEWS of the hour</b></u></h1>
+          <br/>
+          {% for article in newsdata %}
+               <div class="row" style="padding: 2%; min-height: 137px; background: rgba(211, 211, 211, 0.5); border-radius: 19px;">
+                    <div class="col-sm-3">
+                         {% if article.image %}
+                              <img src="{{article.image}}" style="width: 100%" alt="news image">
+                         {% else %}
+                              <img src="{% static 'quotes/images/invalid.jpg' %}" style="width: 100%" alt="Image not found">
+                         {% endif %}
+                    </div>
+                    <div class="col-sm-7">
+                         <h5><b>{{article.a}}</b></h5>
+                         <p>&emsp;{{article.details}}</p>
+                         <br/>
+                         <a href="{{article.url}}" target="_blank" style="position: absolute; bottom: 0pt; right: 0pt">
+                         <p>Read more..</p>
+                         </a>
+                    </div>
+                    <div class="col-sm-2">                   
+                    </div>
+               </div>
+               <hr>     
+          {% endfor %}
+          <div class="pagination">
+               <ul style="margin-left: 40%">               
+                    {% if newsdata.has_previous %}
+                         <li style="display:inline-flex"><a href="?page={{ newsdata.previous_page_number }}" style="color:black"> <b><</b> &nbsp</a></li>
                     {% endif %}
-               </div>
-               <div class="col-sm-7">
-                    <h5><b>{{article.a}}</b></h5>
-                    <p>&emsp;{{article.details}}</p>
-                    <br/>
-                    <a href="{{article.url}}" target="_blank" style="position: absolute; bottom: 0pt; right: 0pt">
-                    <p>Read more..</p>
-                    </a>
-               </div>
-               <div class="col-sm-2">                   
-               </div>
+                    {% for pg in newsdata.paginator.page_range %}
+                         {% if newsdata.number == pg %}
+                              <a href="?page={{ pg }}" style="color:black"><b>{{ pg }}</b></a>
+                         {% endif %}
+                    {% endfor %}
+                    {% if newsdata.has_next %}
+                         <li style="display:inline-flex"><a href="?page={{ newsdata.next_page_number }}" style="color:black"> &nbsp <b>></b>  </a></li>
+                    {% endif %}
+               </ul>
           </div>
-          <hr>     
-     {% endfor %}
-     <div class="pagination">
-          <ul style="margin-left: 40%">               
-               {% if newsdata.has_previous %}
-                    <li style="display:inline-flex"><a href="?page={{ newsdata.previous_page_number }}" style="color:black"> <b><</b> &nbsp</a></li>
-               {% endif %}
-               {% for pg in newsdata.paginator.page_range %}
-                    {% if newsdata.number == pg %}
-                         <a href="?page={{ pg }}" style="color:black"><b>{{ pg }}</b></a>
-                    {% endif %}
-               {% endfor %}
-               {% if newsdata.has_next %}
-                    <li style="display:inline-flex"><a href="?page={{ newsdata.next_page_number }}" style="color:black"> &nbsp <b>></b>  </a></li>
-               {% endif %}
-          </ul>
+          <p style="float: right;">Go back to <a href="{% url 'home1' %}">Home</a></p>
      </div>
-     <p style="float: right;">Go back to <a href="{% url 'home1' %}">Home</a></p>
 </div>
 {% endblock content %}

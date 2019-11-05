@@ -1,17 +1,30 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-<h1 style="font-family: 'Archivo', sans-serif; font-weight: 600; margin-bottom: 1%;">Performance Graph of last 100 days</h1>
-    <div style="overflow: auto;">
-        {% include "stock_information.html" %}
-    </div>
-    <br>
-    <p style="float: right">Go back to <span style="color :blue;"><a onclick="goBack();">Home</a></span></p>
-    {% block scripts %}
-    <script>
-            function goBack() {
-              window.history.back();
-            }
-            </script>
-    {% endblock %}
+<div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
+  <br/>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissable" role="alert">
+        <button class="close" data-dismiss="alert">
+          <small><sup>x</sup></small>
+        </button>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600; margin-bottom: 1%;">Performance Graph of last 100 days</h1>
+      <div style="overflow: auto;">
+          {% include "stock_information.html" %}
+      </div>
+      <br>
+      <p style="float: right">Go back to <span style="color :blue;"><a onclick="goBack();">Home</a></span></p>
+      {% block scripts %}
+      <script>
+              function goBack() {
+                window.history.back();
+              }
+              </script>
+      {% endblock %}
+</div>
 {% endblock content %}
