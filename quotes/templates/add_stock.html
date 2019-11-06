@@ -48,7 +48,7 @@
       <h4 style="font-family: 'Archivo', sans-serif;"><b>Similar stocks</b></h4>
       <div style="overflow:auto">
       {% if not dict %}
-      <p>Add some stocks to get recommendation</p>
+      <p>Sorry, we can't seem to find any similar stocks. Please try adding another company</p>
       {% else %}
         <p>Similar users have added:</p>
         <ul>
@@ -60,7 +60,7 @@
       {% endif %} 
       </div>
   </div> 
-    <div class="col-sm-9" style="margin-bottom: 12%; margin-top: 3%; margin-left: 2px;; background: rgba(240, 248, 255, 0.9); padding: 1% 2%;padding-bottom: 5%; border-radius: 20px;">
+    <div class="col-sm-9" style="margin-bottom: 12%; margin-top: 3%; margin-left: 2px;; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 20px;">
       <br/>
       {% if messages %}
         {% for message in messages %}
@@ -77,9 +77,9 @@
           <p>Type and select company name to add to favorites</p>
           <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST" style="margin-left: 1.5%;">                       
             {% csrf_token %}
-            <div class="row" style="width: 65%;">
+            <div class="row">
               <div class="col p-0" id="ticker_division">
-                  <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Company name" aria-label="Search"  autocomplete="off" style="width: 98%;">
+                  <input class="form-control" id="ticker_id"  type="search" placeholder="Enter Company" aria-label="Search"  autocomplete="off" style="width: 98%;">
                   <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px; min-width: 100%;">
                     <ul id = "ticker_results" class="list-group">
                     </ul>
