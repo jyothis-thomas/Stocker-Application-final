@@ -114,11 +114,12 @@ def add_stock(request):
         dictionary.update({tickers : all_suggestions.count(tickers)})
     # print(dictionary)
     print(current_ticker_list)
-    try:
-        for item in current_ticker_list:
+    
+    for item in current_ticker_list:
+        try:
             del dictionary[item]
-    except Exception as e:
-        print("item not found")
+        except Exception as e:
+            print("item not found")
     # print(dictionary)
     # for key, value in dictionary.items():
     #     print(key)
@@ -334,14 +335,19 @@ def test(request):
     for tickers in all_suggestions:
         dictionary.update({tickers : all_suggestions.count(tickers)})
     print("all tickers and their count",dictionary)
-
+    # del dictionary('FB')
+    print("dict after del", dictionary)
+    print (current_ticker_list)
     try:
         for item in current_ticker_list:
+            print (item)
             print("ticker to be deleted", item)
-            del dictionary[item]
+            dictionary.pop[item]
     except Exception as e:
         print("item not found")
     print("tickers after cleaning", dictionary)
+    print("value of FB",dictionary['FB'])
+
     sorted(dictionary.items(), key=lambda x:x[1])
     print(dictionary)
     if not dictionary:
