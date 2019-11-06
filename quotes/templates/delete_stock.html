@@ -69,7 +69,7 @@
             {% for item in ticker %}
               <tr>
                 <th scope="row">{{ item }}</th>
-                <td onclick="deleteitem('{% url 'delete' item.id %}');"><p class="btn btn-secondary" style="width: 25%;" id="myBtn">Delete {{ item }}</p></td>
+                <td onclick="deleteitem('{% url 'delete' item.id %}');"><p class="btn btn-secondary" style="width: 135px;" id="myBtn">Delete {{ item }}</p></td>
               </tr>
             {% endfor%} 
           </tbody>
