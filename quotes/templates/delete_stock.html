@@ -19,8 +19,8 @@
   /* Modal Content */
   .modal-content {
     min-width: 28%;
-    min-height: 40%;
-    background-color: #fefefe;
+    
+    background-color: rgba(245,243,245,.94);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -78,9 +78,11 @@
 
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close1">&times;</span>
-            <p style="text-align: center; padding-top: 3%;">Are you sure you want to delete?</p>
-            <a onclick="confirmDelete(); clickAndDisable(this);" class="btn btn-secondary px-3 py-2" style="align-self: center; ">Delete</a>
+            
+              <span class="close1">&times;</span>
+              <p style="text-align: center; padding-top: 3%;">Are you sure you want to delete?</p>
+              <a onclick="confirmDelete(); clickAndDisable(this);" class="btn btn-danger px-3 py-2" style="align-self: center; ">Delete</a>
+            
           </div>
         
         </div>
