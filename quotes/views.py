@@ -120,20 +120,23 @@ def add_stock(request):
             del dictionary[item]
         except Exception as e:
             print("item not found")
+
+    suggestion_ticker = {}
     # print(dictionary)
-    # for key, value in dictionary.items():
-    #     print(key)
-    #     company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
-    #                                     key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
-    #     try:
-    #         api = json.loads(company_name.content)
-    #     except Exception as e:
-    #         print("error")
-    #     print(api['companyName'])
+    for key, value in dictionary.items():
+        print(key)
+        company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
+                                        key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
+        try:
+            api = json.loads(company_name.content)
+        except Exception as e:
+            print("error")
+        print(api['companyName'])
+        suggestion_ticker.update({api['companyName'] : value})
     #     dictionary[api['companyName']] = dictionary.pop(key)
-    sorted_dict = sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+    sorted_dict = sorted(suggestion_ticker.items(), key=operator.itemgetter(1), reverse=True)
     dictionary = collections.OrderedDict(sorted_dict)
-    print(dictionary)
+    print("Company name:",suggestion_ticker)
         
 
     if request.method == 'POST':
