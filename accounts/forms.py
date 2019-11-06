@@ -18,3 +18,4 @@ class UserRegForm(UserCreationForm):
         if user_entered_email in users_emails:
             raise ValidationError(gettext("Duplicate email"),code='email_already_exists')
         return user_entered_email
+

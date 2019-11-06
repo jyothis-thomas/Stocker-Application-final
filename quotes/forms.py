@@ -6,9 +6,11 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext
 
 class StockForm(forms.ModelForm):
+
     class Meta:
         model = Stock
         fields = "__all__"
+
 class Editprofile(forms.ModelForm):
     
     class Meta:
@@ -21,3 +23,7 @@ class Editprofile(forms.ModelForm):
         if user_entered_email in users_emails:
             raise ValidationError(gettext("Duplicate email"),code='email_already_exists')
         return user_entered_email
+
+    def __init__(self, *args, **kwargs):
+        super(Editprofile, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
