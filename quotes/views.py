@@ -77,13 +77,12 @@ def add_stock(request):
     import json
     import operator
     import collections
+
     not_current_user = []
     ticker = Stock.objects.filter(user=request.user)
     current_ticker_list = []
     for tic in ticker:
         current_ticker_list.append(tic.ticker)
-    # if current_ticker_list == null:
-    #     return render(request, 'add_stock.html', {'ticker': ticker, '': dictionary})
     ticker_all = Stock.objects.all()
     for i in ticker_all:
         if (i in ticker):
@@ -121,16 +120,16 @@ def add_stock(request):
     except Exception as e:
         print("item not found")
     # print(dictionary)
-    for key, value in dictionary.items():
-        print(key)
-        company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
-                                        key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
-        try:
-            api = json.loads(company_name.content)
-        except Exception as e:
-            print("error")
-        print(api['companyName'])
-        dictionary[api['companyName']] = dictionary.pop(key)
+    # for key, value in dictionary.items():
+    #     print(key)
+    #     company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
+    #                                     key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
+    #     try:
+    #         api = json.loads(company_name.content)
+    #     except Exception as e:
+    #         print("error")
+    #     print(api['companyName'])
+    #     dictionary[api['companyName']] = dictionary.pop(key)
     sorted_dict = sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
     dictionary = collections.OrderedDict(sorted_dict)
     print(dictionary)
@@ -306,6 +305,7 @@ def test(request):
     current_ticker_list = []
     for tic in ticker:
         current_ticker_list.append(tic.ticker)
+    print("current users tickers b4 cleaning", current_ticker_list)
     ticker_all = Stock.objects.all()
     for i in ticker_all:
         if (i in ticker):
@@ -314,12 +314,11 @@ def test(request):
             # print (i.user)
             not_current_user.append(i.user)
     user_name = set(not_current_user)
-    print (user_name)
+    print ("All users except current",user_name)
     ticker_users = []
     for p in user_name :
         ticker_users.append(Stock.objects.filter(user=p))
-    sugesstion_ticker = []
-    
+    sugesstion_ticker = []   
     for r in ticker_users:
         for u in r:
             for l in ticker:
@@ -330,17 +329,19 @@ def test(request):
     for j in sugesstion_ticker:
         for i in j:
             all_suggestions.append(i.ticker)
-    print(all_suggestions)
+    print("all suggestions",all_suggestions)
     dictionary = {}
     for tickers in all_suggestions:
         dictionary.update({tickers : all_suggestions.count(tickers)})
-    print(dictionary)
-    print(current_ticker_list)
+    print("all tickers and their count",dictionary)
+
     try:
         for item in current_ticker_list:
+            print("ticker to be deleted", item)
             del dictionary[item]
     except Exception as e:
         print("item not found")
+    print("tickers after cleaning", dictionary)
     sorted(dictionary.items(), key=lambda x:x[1])
     print(dictionary)
     if not dictionary:

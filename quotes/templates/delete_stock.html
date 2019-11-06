@@ -47,7 +47,7 @@
     {% for message in messages %}
       <div class="alert alert-warning alert-dismissable" role="alert">
         <button class="close" data-dismiss="alert">
-          <small><sup>x</sup></small>
+          <small><sup>X</sup></small>
         </button>
         {{ message }}
       </div>
@@ -77,9 +77,9 @@
 
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close1">&times;</span>
             <p style="text-align: center;">Are you sure you want to delete?</p>
-            <a onclick="confirmDelete();" class="btn btn-secondary" style="width: 25%; align-self: center; ">Delete</a>
+            <a onclick="confirmDelete(); clickAndDisable(this);" class="btn btn-secondary px-3 py-2" style="align-self: center; ">Delete</a>
           </div>
         
         </div>
@@ -96,8 +96,14 @@
   </div>
   <script>
     var url = null;
+    var span = document.getElementsByClassName("close1")[0];
+    var modal = document.getElementById("myModal");
 
     function deleteitem(itemurl){
+      modal = document.getElementById("myModal");
+      span = document.getElementsByClassName("close1")[0];
+      console.log(span);
+      callPopUp();
       console.log("something");
       url = itemurl;
     }
@@ -108,21 +114,23 @@
     }
 
     // Get the modal
-    var modal = document.getElementById("myModal");
+    
     
     // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
+    //var btn = document.getElementById("myBtn");
     
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+      
     
     // When the user clicks the button, open the modal 
-    btn.onclick = function() {
+    function callPopUp() {
+      
       modal.style.display = "block";
     }
     
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
+      
       modal.style.display = "none";
     }
     
