@@ -12,7 +12,7 @@
     <script> 
       function clickAndDisable(link) {
         link.onclick = function(event) {
-           event.preventDefault();
+          event.preventDefault();
         }
       }   
     </script>
@@ -20,9 +20,7 @@
   <style>
     .bg-custom-2 {
       background-color: rgba(48, 48, 48, .95);
-      }
-  </style>
-  <style>
+    }
     .pointer {cursor: pointer;}
     li:hover{
       background-color: darkgray;
@@ -69,8 +67,7 @@
               <div class="col p-0" id = ticker_div>
                 <input class="form-control mr-sm-2" id = ticker_name type="search" placeholder="Enter Company Name" aria-label="Search" name="ticker_symbol" autocomplete="off">
                 <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px;min-width: 96%;z-index: 1;">
-                  <ul id = "ticker_list" class="list-group">
-                  </ul>
+                  <ul id = "ticker_list" class="list-group"></ul>
                 </div>
                 <input type="hidden" id="hidden_ticker_symbol" name="ticker_symbol_hidden" value=''>
               </div>
@@ -81,9 +78,9 @@
           </form>
       </div>
     </nav>
-      {% block content %}
+    {% block content %}
 
-      {% endblock %}
+    {% endblock %}
     <div class="footer" style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: rgba(48, 48, 48, .96); color: white; text-align: center; padding-top: 5px; padding-bottom: 5px; "> 
       &#169; <a href="https://www.sayonetech.com" target="_blank" style="text-decoration: none;">Sayone</a> All rights reserved
     </div>

@@ -29,9 +29,7 @@ def home(request):
     else:
         ticker = Stock.objects.filter(user=request.user)
         output = []
-
         for ticker_item in ticker:
-
             api_requests = requests.get("https://cloud.iexapis.com/stable/stock/" + str(
                 ticker_item) + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
             try:

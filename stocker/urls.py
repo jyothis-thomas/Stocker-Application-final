@@ -26,8 +26,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('quotes.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
-
-    #Password reset magic happens here
+    #password-reset
     path(
         'change-password/',
         auth_views.PasswordChangeView.as_view(

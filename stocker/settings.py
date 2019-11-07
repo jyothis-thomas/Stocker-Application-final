@@ -25,7 +25,6 @@ SECRET_KEY = 'vn!br$o4n8v$n3ruo($+hru9fl0!dhph91id_1#n+u9inytx!h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# ALLOWED_HOSTS = ["stocker-application.herokuapp.com", "localhost", "127.0.0.1","*"]
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
@@ -147,8 +146,8 @@ LOGOUT_REDIRECT_URL = 'home1'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'xxx'
-EMAIL_HOST_PASSWORD = 'xxx'
+EMAIL_HOST_USER = 'tactist.player@gmail.com'
+EMAIL_HOST_PASSWORD = 'jyothis1@'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Stocker Team <noreply@stocker.com>'

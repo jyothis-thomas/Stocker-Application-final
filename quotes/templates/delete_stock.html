@@ -1,56 +1,56 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-<style>
-  .modal {
-    display: none; 
-    position: fixed;
-    z-index: 1; 
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-  }
+  <style>
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 1; 
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+    }
 
-  .modal-content {
-    min-width: 28%;
-    background-color: rgba(245,243,245,.94);
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: max-content;
-  }
+    .modal-content {
+      min-width: 28%;
+      background-color: rgba(245,243,245,.94);
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: max-content;
+    }
 
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-</style>
-<div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
-  <br/>
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-warning alert-dismissable" role="alert">
-        <button class="close" data-dismiss="alert">
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+  <div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 5%; border-radius: 1%;">
+    <br/>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+          <button class="close" data-dismiss="alert">
           <small><sup>X</sup></small>
-        </button>
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
     <div style="padding-bottom: 6%;">
       <h1 style="font-family: 'Archivo', sans-serif; font-weight: 600;">Delete From Favorites</h1>
       {% if ticker %}
@@ -88,35 +88,34 @@
       {% endif %}
     </div>
   </div>
-  <script>
-    var url = null;
-    var span = document.getElementsByClassName("close1")[0];
-    var modal = document.getElementById("myModal");
-    function deleteitem(itemurl){
-      modal = document.getElementById("myModal");
-      span = document.getElementsByClassName("close1")[0];
-      console.log(span);
-      callPopUp();
-      console.log("something");
-      url = itemurl;
-    }
-    function confirmDelete(){
-      console.log(url);
-      location.href = url;
-    } 
-    function callPopUp() {     
-      modal.style.display = "block";
-    }
-
-    span.onclick = function() {      
-      modal.style.display = "none";
-    }
-    
-    window.onclick = function(event) {
-      if (event.target == modal) {
+  {% block scripts %}
+    <script>
+      var url = null;
+      var span = document.getElementsByClassName("close1")[0];
+      var modal = document.getElementById("myModal");
+      function deleteitem(itemurl){
+        modal = document.getElementById("myModal");
+        span = document.getElementsByClassName("close1")[0];
+        console.log(span);
+        callPopUp();
+        console.log("something");
+        url = itemurl;
+      }
+      function confirmDelete(){
+        console.log(url);
+        location.href = url;
+      } 
+      function callPopUp() {     
+        modal.style.display = "block";
+      }
+      span.onclick = function() {      
         modal.style.display = "none";
       }
-    }
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     </script>
-    
+  {% endblock %}    
 {% endblock content %}

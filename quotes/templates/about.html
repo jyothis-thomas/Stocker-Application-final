@@ -1,24 +1,24 @@
 {% extends 'base2.html' %}
-    {% block content %}
-    <div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 8%; border-radius: 1%;">
-        <br/>
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-warning alert-dismissable" role="alert">
-              <button class="close" data-dismiss="alert">
-                <small><sup>x</sup></small>
-              </button>
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-        <div>
-            <h1><b>About me..</b></h1>
-            <p>&emsp;This site was created to help users track the stock prices of their favorite stocks simple by logging in. The app is still in alpha and any suggestions will be highly appreciated.</p>
-            <h4><b>What Is Ticker Symbol?</b></h4>
-            <p>&emsp;A ticker symbol is an arrangement of characters—usually letters—representing particular securities listed on an exchange or otherwise traded publicly. When a company issues securities to the public marketplace, it selects an available ticker symbol for its securities that investors and traders use to transact orders. Every listed security has a unique ticker symbol, facilitating the vast array of trade orders that flow through the financial markets every day.</p>
-            <p>Want to learn more? Click <a href="https://www.investopedia.com/terms/t/tickersymbol.asp" target="_blank">here</a></p>
-            <p style="float: right;">Go back to <a href="{% url 'home1' %}">Home</a></p>
+{% block content %}
+  <div class="container" style="margin-bottom: 12%; margin-top: 3%; background: rgba(240, 248, 255, 0.9); padding: 1% 4%;padding-bottom: 8%; border-radius: 1%;">
+    <br/>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+          <button class="close" data-dismiss="alert">
+            <small><sup>x</sup></small>
+          </button>
+          {{ message }}
         </div>
+      {% endfor %}
+    {% endif %}
+    <div>
+      <h1><b>About me..</b></h1>
+      <p>&emsp;This site was created to help users track the stock prices of their favorite stocks simple by logging in. The app is still in alpha and any suggestions will be highly appreciated.</p>
+      <h4><b>What Is Ticker Symbol?</b></h4>
+      <p>&emsp;A ticker symbol is an arrangement of characters—usually letters—representing particular securities listed on an exchange or otherwise traded publicly. When a company issues securities to the public marketplace, it selects an available ticker symbol for its securities that investors and traders use to transact orders. Every listed security has a unique ticker symbol, facilitating the vast array of trade orders that flow through the financial markets every day.</p>
+      <p>Want to learn more? Click <a href="https://www.investopedia.com/terms/t/tickersymbol.asp" target="_blank">here</a></p>
+      <p style="float: right;">Go back to <a href="{% url 'home1' %}">Home</a></p>
     </div>
-    {% endblock content %}
+</div>
+{% endblock content %}

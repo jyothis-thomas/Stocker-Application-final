@@ -6,13 +6,11 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext
 
 class StockForm(forms.ModelForm):
-
     class Meta:
         model = Stock
         fields = "__all__"
 
 class Editprofile(forms.ModelForm):
-    
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name')
