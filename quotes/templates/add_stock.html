@@ -10,39 +10,26 @@
 </style>
   <script>
     $(document).ready(function(){
-    //$('#artists_hid').val("|");
-    // $.ajaxSetup({ cache: false });
-    $('#ticker_id').keyup(function(){
-      $('#ticker_results').html('');
-      var searchField = $('#ticker_id').val();
-      //alert(searchField)
-      $.getJSON("{% url 'ticker-autocomplete' %}",data="q="+searchField,function(data) {
-        //alert(data)
-        $.each(JSON.parse(data), function(key, value){
-          //alert(value+" -- "+expression);
-          $('#ticker_results').append(`<li class="list-group-item link-class pointer" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
-        });   
+      $('#ticker_id').keyup(function(){
+        $('#ticker_results').html('');
+        var searchField = $('#ticker_id').val();
+        $.getJSON("{% url 'ticker-autocomplete' %}",data="search_entry="+searchField,function(data) {
+          $.each(JSON.parse(data), function(key, value){
+            $('#ticker_results').append(`<li class="list-group-item link-class pointer" style = "padding:5px"><span class="text-muted">`+value.fields.company_name+"("+value.pk+")"+'</span></li>');        
+          });   
+        });
+      });   
+      $('#ticker_results').on('click', 'li', function() {
+        click_text = $(this).text();
+        $('#ticker_id').val($.trim(click_text));
+        $("#ticker_results").html('');
+        var ticker_symbol = $("#ticker_id").val().split('(')[1].split(')')[0];
+        $("#hidden_ticker").val(ticker_symbol)      
       });
-    });   
-    $('#ticker_results').on('click', 'li', function() {
-      click_text = $(this).text();
-      $('#ticker_id').val($.trim(click_text));
-      $("#ticker_results").html('');
-      var ticker_symbol = $("#ticker_id").val().split('(')[1].split(')')[0];
-      $("#hidden_ticker").val(ticker_symbol)
-      //alert(click_text[0]);
-      // $('#ticker_id').val($.trim(click_text));      
     });
-    });
-    // $('#ticker_division').focusout(function(){
-    //     $('#ticker_results').empty();
-    //   });
-      
   </script>
 {% endblock %}
-
 {% block content %}
-<!-- <div class="container"> -->
   <div class="row">
     <div class="col-sm-2" style="background: rgba(230, 230, 230, 0.95); border-radius: 20px;margin-bottom: 12%; margin-top: 3%; padding: 3% 2%;padding-bottom: 5%; margin-left: 2%;">
       <h4 style="font-family: 'Archivo', sans-serif;"><b>Similar stocks</b></h4>
@@ -142,5 +129,4 @@
         </div>
       </div>
   </div>
-<!-- </div> -->
 {% endblock content %}

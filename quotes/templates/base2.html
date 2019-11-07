@@ -71,7 +71,7 @@
             <div class="row">
               <div class="col p-0" id = ticker_div>
                 <input class="form-control mr-sm-2" id = ticker_name type="search" placeholder="Enter Company Name" aria-label="Search" name="ticker_symbol" autocomplete="off">
-                <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px;min-width: 96%;">
+                <div style="height: fit-content; overflow: scroll; max-height: 100px; overflow-x: hidden; position:absolute; border-radius: 5px;min-width: 96%;z-index: 1;">
                   <ul id = "ticker_list" class="list-group">
                   </ul>
                 </div>
@@ -107,7 +107,7 @@
         $('#ticker_list').html('');
         var searchField = $('#ticker_name').val();
         //alert(searchField)
-        $.getJSON("{% url 'ticker-autocomplete' %}",data="q="+searchField,function(data) {
+        $.getJSON("{% url 'ticker-autocomplete' %}",data="search_entry="+searchField,function(data) {
           //alert(data)
           $.each(JSON.parse(data), function(key, value){
             //alert(value+" -- "+expression);

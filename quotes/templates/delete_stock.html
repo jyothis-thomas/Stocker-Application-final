@@ -3,23 +3,21 @@
 {% block content %}
 <style>
   .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
   }
 
-  /* Modal Content */
   .modal-content {
     min-width: 28%;
-    
     background-color: rgba(245,243,245,.94);
     margin: auto;
     padding: 20px;
@@ -27,7 +25,6 @@
     width: max-content;
   }
 
-  /* The Close Button */
   .close {
     color: #aaaaaa;
     float: right;
@@ -75,18 +72,12 @@
           </tbody>
         </table>
         <div id="myModal" class="modal">
-
-          <!-- Modal content -->
           <div class="modal-content">
-            
               <span class="close1">&times;</span>
               <p style="text-align: center; padding-top: 3%;">Are you sure you want to delete?</p>
               <a onclick="confirmDelete(); clickAndDisable(this);" class="btn btn-danger px-3 py-2" style="align-self: center; ">Delete</a>
-            
-          </div>
-        
+          </div>       
         </div>
-        
         <div style="padding-top: 2%;">
           <p style="float: right"> Click <a href="/add_stock/">Here</a> to add stocks to Favorites</p>
         </div>
@@ -101,7 +92,6 @@
     var url = null;
     var span = document.getElementsByClassName("close1")[0];
     var modal = document.getElementById("myModal");
-
     function deleteitem(itemurl){
       modal = document.getElementById("myModal");
       span = document.getElementsByClassName("close1")[0];
@@ -110,34 +100,18 @@
       console.log("something");
       url = itemurl;
     }
-
     function confirmDelete(){
       console.log(url);
       location.href = url;
-    }
-
-    // Get the modal
-    
-    
-    // Get the button that opens the modal
-    //var btn = document.getElementById("myBtn");
-    
-    // Get the <span> element that closes the modal
-      
-    
-    // When the user clicks the button, open the modal 
-    function callPopUp() {
-      
+    } 
+    function callPopUp() {     
       modal.style.display = "block";
     }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      
+
+    span.onclick = function() {      
       modal.style.display = "none";
     }
     
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
