@@ -193,7 +193,9 @@ def edit(request):
     if request.method == 'POST':
         form = Editprofile(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            form_instance = form.save(commit=False)
+            form_instance.email = request.user.email
+            form_instance.save()
             print("valid")
             return redirect('profile')
     else:

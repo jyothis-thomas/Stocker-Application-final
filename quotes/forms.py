@@ -16,7 +16,7 @@ class Editprofile(forms.ModelForm):
         fields = ('username', 'email', 'first_name', 'last_name')
 
     def clean_email(self):
-        users_emails = [ x.email for x in User.objects.all().only("email")]
+        users_emails = [ x.email for x in User.objects.all().exclude(email=self.user.email).only("email")]
         user_entered_email = self.cleaned_data['email']
         if user_entered_email in users_emails:
             raise ValidationError(gettext("Duplicate email"),code='email_already_exists')
@@ -27,4 +27,5 @@ class Editprofile(forms.ModelForm):
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
+        self.user = kwargs.pop('instance', None)
         
