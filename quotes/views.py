@@ -59,10 +59,9 @@ def add_stock(request):
     current_ticker_list = []
     for tickers in current_user_ticker:
         current_ticker_list.append(tickers.ticker)
-    ticker_all = Stock.objects.all()
-    for tickers in ticker_all:
-        if (tickers not in current_user_ticker):
-            not_current_user.append(tickers.user)   
+    ticker_all = Stock.objects.all().exclude(user=request.user)
+    for tickers in ticker_all:   
+        not_current_user.append(tickers.user)   
     user_name = set(not_current_user)
     # print(user_name)
     ticker_users = []
