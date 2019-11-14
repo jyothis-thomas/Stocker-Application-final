@@ -54,56 +54,68 @@ def add_stock(request):
     import operator
     import collections
     #Similar suggestion
+    all_stocks =  Stock.objects.select_related('user').all()
+    print("all Stocks", all_stocks)
     not_current_user = []
-    current_user_ticker = Stock.objects.filter(user=request.user)
-    current_ticker_list = []
-    for tickers in current_user_ticker:
-        current_ticker_list.append(tickers.ticker)
-    ticker_all = Stock.objects.all().exclude(user=request.user)
-    for tickers in ticker_all:   
-        not_current_user.append(tickers.user)   
-    user_name = set(not_current_user)
+    current_user_stocks = all_stocks.filter(user=request.user)
+    current_user_ticker_list = []
+    for stock in current_user_stocks:
+        current_user_ticker_list.append(stock.ticker)
+    
+    ticker_all = all_stocks.exclude(user=request.user)
+    for stock in ticker_all:   
+        not_current_user.append(stock.user) 
+
+    users_name = set(not_current_user)
     # print(user_name)
     ticker_users = []
     #fetch all users as queryset
-    for users in user_name :
-        ticker_users.append(Stock.objects.filter(user=users))
-    sugesstion_ticker = []    
-    for users in ticker_users:
-        for individual_user in users:
-            for tickers in current_user_ticker:   
-                if tickers.ticker == individual_user.ticker:
-                    sugesstion_ticker.append(Stock.objects.filter(user=individual_user.user))
+    for users in users_name:
+        ticker_users.append(all_stocks.select_related('user').filter(user=users))
+    sugesstion_ticker = []   
+
+    print (ticker_users) 
+
+    for users in ticker_users :
+        print("users", users)
+        for individual_user in users: 
+            print ("individual user", individual_user) 
+            if  individual_user.ticker in current_user_ticker_list:
+
+                sugesstion_ticker.append(all_stocks.filter(user=individual_user.user))
+
     all_suggestions = []
-    for tickers in sugesstion_ticker:
-        for suggestion in tickers:
+
+
+    for stock in sugesstion_ticker:
+        for suggestion in stock:
             all_suggestions.append(suggestion.ticker)
     # print(all_suggestions)
     dictionary = {}
-    for tickers in all_suggestions:
-        dictionary.update({tickers : all_suggestions.count(tickers)})
+    for stock in all_suggestions:
+        dictionary.update({stock : all_suggestions.count(stock)})
     # print(dictionary)
     # print(current_ticker_list)    
-    for tickers in current_ticker_list:
+    for stock in current_user_ticker_list:
         try:
-            del dictionary[tickers]
+            del dictionary[stock]
         except Exception as e:
             print("item not found")
     suggestion_ticker = {}
-    # print(dictionary)
+
     for key, value in dictionary.items():
-        print(key)
+
         company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
                                         key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
         try:
             api = json.loads(company_name.content)
         except Exception as e:
             print("error loading company details")
-        # print(api['companyName'])
+        print(api['companyName'])
         suggestion_ticker.update({api['companyName'] : value})
     sorted_dict = sorted(suggestion_ticker.items(), key=operator.itemgetter(1), reverse=True)
     dictionary = collections.OrderedDict(sorted_dict)
-    # print("Company name:",suggestion_ticker)
+
     #add stock to favorites   
     if request.method == 'POST':
         stock_form = StockForm(request.POST or None)
@@ -132,7 +144,7 @@ def add_stock(request):
             return redirect('add_stock')
     else:
         print("finished ticker")
-        ticker = Stock.objects.filter(user=request.user)
+        ticker = Stock.objects.select_related('user').filter(user=request.user)
         output = []
         if ticker:
             for ticker_item in ticker:
