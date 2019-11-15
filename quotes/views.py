@@ -235,20 +235,20 @@ def graph(request, ticker):
     dataForAllDays_df.head()
     #Check the datatype
     dataForAllDays_df.info()
-    inc = dataForAllDays_df.close > dataForAllDays_df.open
-    dec = dataForAllDays_df.open > dataForAllDays_df.close
-    w = 12*60*60*1000 # half day in ms
+    gain = dataForAllDays_df.close > dataForAllDays_df.open
+    loss = dataForAllDays_df.open > dataForAllDays_df.close
+    half_day_in_ms = 12*60*60*1000 # half day in ms
     TOOLS = "pan,wheel_zoom,box_zoom,reset,save"
     title = stock_name + ' Chart'
-    p = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000, title = title, x_axis_label= "Date", y_axis_label= "Stock Price")
-    p.xaxis.major_label_orientation = math.pi/4
-    p.grid.grid_line_alpha=0.3
-    p.segment(dataForAllDays_df.date, dataForAllDays_df.high, dataForAllDays_df.date, dataForAllDays_df.low, color="black")
-    p.vbar(dataForAllDays_df.date[inc], w, dataForAllDays_df.open[inc], dataForAllDays_df.close[inc], fill_color="#D5E1DD", line_color="black")
-    p.vbar(dataForAllDays_df.date[dec], w, dataForAllDays_df.open[dec], dataForAllDays_df.close[dec], fill_color="#F2583E", line_color="black")
+    graph_plot = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000, title = title, x_axis_label= "Date", y_axis_label= "Stock Price")
+    graph_plot.xaxis.major_label_orientation = math.pi/4
+    graph_plot.grid.grid_line_alpha=0.3
+    graph_plot.segment(dataForAllDays_df.date, dataForAllDays_df.high, dataForAllDays_df.date, dataForAllDays_df.low, color="black")
+    graph_plot.vbar(dataForAllDays_df.date[gain], half_day_in_ms, dataForAllDays_df.open[gain], dataForAllDays_df.close[gain], fill_color="#D5E1DD", line_color="black")
+    graph_plot.vbar(dataForAllDays_df.date[loss], half_day_in_ms, dataForAllDays_df.open[loss], dataForAllDays_df.close[loss], fill_color="#F2583E", line_color="black")
     #Store as a HTML file
     output_file("quotes/templates/stock_information.html", title="candlestick.py example")
-    save(p)
+    save(graph_plot)
     # return render(request, 'stock_information.html', {})
     return render(request, 'graph_view.html', {})
 
