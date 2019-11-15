@@ -60,12 +60,10 @@ def add_stock(request):
     current_user_stocks = all_stocks.filter(user=request.user)
     current_user_ticker_list = []
     for stock in current_user_stocks:
-        current_user_ticker_list.append(stock.ticker)
-    
+        current_user_ticker_list.append(stock.ticker)    
     ticker_all = all_stocks.exclude(user=request.user)
     for stock in ticker_all:   
         not_current_user.append(stock.user) 
-
     users_name = set(not_current_user)
     # print(user_name)
     ticker_users = []
@@ -73,20 +71,14 @@ def add_stock(request):
     for users in users_name:
         ticker_users.append(all_stocks.select_related('user').filter(user=users))
     sugesstion_ticker = []   
-
     print (ticker_users) 
-
     for users in ticker_users :
         print("users", users)
         for individual_user in users: 
             print ("individual user", individual_user) 
             if  individual_user.ticker in current_user_ticker_list:
-
                 sugesstion_ticker.append(all_stocks.filter(user=individual_user.user))
-
     all_suggestions = []
-
-
     for stock in sugesstion_ticker:
         for suggestion in stock:
             all_suggestions.append(suggestion.ticker)
@@ -102,9 +94,7 @@ def add_stock(request):
         except Exception as e:
             print("item not found")
     suggestion_ticker = {}
-
     for key, value in dictionary.items():
-
         company_name = requests.get("https://cloud.iexapis.com/stable/stock/" +
                                         key + "/quote?token=pk_10c8988d72794440b4f9bba3e0cde284")
         try:
