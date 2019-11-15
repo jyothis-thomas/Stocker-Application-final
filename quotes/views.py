@@ -55,7 +55,7 @@ def add_stock(request):
     import collections
     #Similar suggestion
     all_stocks =  Stock.objects.select_related('user').all()
-    print("all Stocks", all_stocks)
+    # print("all Stocks", all_stocks)
     not_current_user = []
     current_user_stocks = all_stocks.filter(user=request.user)
     current_user_ticker_list = []
@@ -73,11 +73,12 @@ def add_stock(request):
     sugesstion_ticker = []   
     print (ticker_users) 
     for users in ticker_users :
-        print("users", users)
+        # print("users", users)
         for individual_user in users: 
-            print ("individual user", individual_user) 
+            # print ("individual user", individual_user) 
             if  individual_user.ticker in current_user_ticker_list:
                 sugesstion_ticker.append(all_stocks.filter(user=individual_user.user))
+                break
     all_suggestions = []
     for stock in sugesstion_ticker:
         for suggestion in stock:
@@ -101,7 +102,7 @@ def add_stock(request):
             api = json.loads(company_name.content)
         except Exception as e:
             print("error loading company details")
-        print(api['companyName'])
+        # print(api['companyName'])
         suggestion_ticker.update({api['companyName'] : value})
     sorted_dict = sorted(suggestion_ticker.items(), key=operator.itemgetter(1), reverse=True)
     dictionary = collections.OrderedDict(sorted_dict)

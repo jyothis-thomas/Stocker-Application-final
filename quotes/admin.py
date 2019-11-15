@@ -2,8 +2,7 @@ from django.contrib import admin
 from . models import Stock, TickerModel
 
 class Stock_list(admin.ModelAdmin):
-    list_display = ('ticker', 'user')
-    
+    list_display = ('ticker', 'user')   
 
 class TickerModel_list(admin.ModelAdmin):
     list_display = ('company_name', 'ticker_symbols')
